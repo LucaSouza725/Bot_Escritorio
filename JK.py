@@ -84,7 +84,7 @@ def Juscelino_Kubitschek(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -117,7 +117,7 @@ def Juscelino_Kubitschek(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_garagem)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_relevante)
         pyautogui.press('Enter')
@@ -141,7 +141,7 @@ def Juscelino_Kubitschek(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(deposito)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor)
         pyautogui.press('Enter')
@@ -168,7 +168,7 @@ def Juscelino_Kubitschek(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(f"0001")
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')

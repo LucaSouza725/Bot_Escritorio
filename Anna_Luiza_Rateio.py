@@ -3,6 +3,8 @@ import re
 import pyautogui
 
 # Contador para saber qual o numero do rateio que será feito
+
+
 def obter_contador():
     try:
         with open("contadorAL.txt", "r") as file:
@@ -11,6 +13,7 @@ def obter_contador():
         contador = 0
     return contador
 
+
 def incrementar_contador():
     contador = obter_contador()
     contador += 1
@@ -18,6 +21,7 @@ def incrementar_contador():
         file.write(str(contador))
     return contador
 # Finalização do contador
+
 
 def Anna_Luiza_Rateio(arquivo):
     # Substitua 'nome.pdf' pelo caminho correto do seu arquivo
@@ -76,7 +80,7 @@ def Anna_Luiza_Rateio(arquivo):
     pyautogui.press('Enter')
     pyautogui.write(f'R{valor_do_contador}/12')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_salas:
         numero_sala, protocolo, conteudo_sala = resultado

@@ -3,6 +3,7 @@ import fitz  # PyMuPDF
 import re
 import pyautogui
 
+
 def Tocantins(arquivo):
     # Substitua 'nome.pdf' pelo caminho correto do seu arquivo
     arquivo = 'tocantins.pdf'
@@ -11,7 +12,8 @@ def Tocantins(arquivo):
     for pagina in pdf:  # Percorre todas as páginas do documento
         texto = pagina.get_text()
         lista_texto_paginas.append(texto)  # Adiciona o texto da página à lista
-    texto_pdf = ''.join(lista_texto_paginas)  # Combina o texto de todas as páginas
+    # Combina o texto de todas as páginas
+    texto_pdf = ''.join(lista_texto_paginas)
 
     # Expressão regular para encontrar a data de vencimento (formato mm/aaaa)
     padrao_referencia_mensal = r"\b(\d{2})/(\d{4})\b"
@@ -61,13 +63,19 @@ def Tocantins(arquivo):
     pyautogui.write(data_vencimento)
     pyautogui.press('Enter')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
-    
+    pyautogui.press('Tab', presses=2)
+
     for resultado in resultados_salas:
         numero_sala, protocolo, conteudo_sala = resultado
 
         # Extraindo todos os valores numéricos da seção capturada
         valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)
+
+        # Excluindo o último valor numérico se ele pertencer ao total geral e não ao total da sala
+        # Esta lógica assume que o "Total Geral" é sempre o último valor no documento e não pertence a nenhuma sala
+        if 'Total:' in conteudo_sala:
+            # Remove o último valor, que é o total geral do documento
+            valores = valores[:-1]
 
         # O último valor numérico é assumido como o valor total da sala
         valor_total = valores[-1] if valores else "Valor não encontrado"
@@ -75,7 +83,7 @@ def Tocantins(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')

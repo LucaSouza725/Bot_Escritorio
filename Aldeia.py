@@ -47,7 +47,7 @@ def Aldeia_bueno(arquivo):
     pyautogui.write('36')
     pyautogui.press('enter', presses=2)
     pyautogui.click(x=426, y=302)
-    
+
     # Inserindo um novo condomínio/ou bloco na Bios
     pyautogui.PAUSE = 1.5
     pyautogui.click(x=510, y=298)
@@ -79,7 +79,7 @@ def Aldeia_bueno(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')

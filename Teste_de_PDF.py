@@ -1,15 +1,17 @@
-import fitz  # Importa a biblioteca PyMuPDF
+import fitz  # PyMuPDF
 
-# Substitua 'seu_arquivo.pdf' pelo caminho até o seu arquivo PDF
-arquivo_pdf = 'indiapora.pdf'
-
-# Abre o arquivo PDF
+arquivo_pdf = 'minas.pdf'
 pdf = fitz.open(arquivo_pdf)
 
-# Itera por cada página do PDF
-for num_pagina, pagina in enumerate(pdf, start=1):
-    texto = pagina.get_text()  # Obtém o texto da página
-    print(f"Página {num_pagina}:\n{texto}\n")  # Imprime o texto da página
+# Verifica todas as páginas
+for num_pagina in range(len(pdf)):
+    pagina = pdf[num_pagina]
+    texto = pagina.get_text("text")  # Extrai o texto bruto
 
-# Fecha o documento PDF
+    print(f"📄 Página {num_pagina +
+          1} (Tamanho: {len(texto)} caracteres)\n{'-'*50}")
+    # Mostra apenas os primeiros 1000 caracteres para evitar flood
+    print(texto[:1000])
+    print("\n\n")
+
 pdf.close()

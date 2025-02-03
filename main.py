@@ -118,12 +118,13 @@ abrir_programa(program_path)
 
 # Colocando a Senha na Bios
 time.sleep(8)
+pyautogui.click(x=367, y=41)
 pyautogui.write("725725")
 pyautogui.press("Enter")
 time.sleep(10)
 
 # Abrindo o condomínio
-pyautogui.click()
+pyautogui.click(x=336, y=335)
 pyautogui.press('alt')
 pyautogui.press('1')
 pyautogui.press('3')

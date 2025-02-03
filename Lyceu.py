@@ -55,7 +55,7 @@ def Lyceu(arquivo):
     pyautogui.write(data_vencimento)
     pyautogui.press('Enter')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
     
     for resultado in resultados_salas:
         numero_sala, protocolo, conteudo_sala = resultado

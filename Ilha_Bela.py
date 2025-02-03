@@ -25,7 +25,7 @@ def Ilha_bela(arquivo):
         # Formata para o mês de referência atrasado (mmYYYY)
         mes_referencia_atrasado = data_referencia.strftime('%m%Y')
 
-        # Define o dia de vencimento como 03
+        # Define o dia de vencimento como 12
         dia_vencimento = "12"
 
         # Usa o ano e mês originais para a data de vencimento

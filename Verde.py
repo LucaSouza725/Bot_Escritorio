@@ -110,7 +110,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('1A')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_1A:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -124,7 +124,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -143,7 +143,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('1B')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_1B:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -157,7 +157,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -176,7 +176,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('2A')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_2A:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -190,7 +190,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -209,7 +209,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('2B')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_2B:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -223,7 +223,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -242,7 +242,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('3A')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_3A:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -256,7 +256,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -275,7 +275,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('3B')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_3B:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -289,7 +289,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -308,7 +308,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('3C')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_3C:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -322,7 +322,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -341,7 +341,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('4A')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_4A:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -355,7 +355,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -374,7 +374,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('4B')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_4B:
         numero_sala, protocolo, conteudo_sala = resultado
@@ -388,7 +388,7 @@ def Verde(arquivo):
         pyautogui.PAUSE = 0.5
         pyautogui.write(numero_sala)
         pyautogui.press('Enter')
-        pyautogui.write(protocolo)
+        pyautogui.write("0"+protocolo)
         pyautogui.press('Enter')
         pyautogui.write(valor_total)
         pyautogui.press('Enter')
@@ -407,7 +407,7 @@ def Verde(arquivo):
     pyautogui.press('Enter')
     pyautogui.write('4C')
     pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+    pyautogui.press('Tab', presses=2)
 
     for resultado in resultados_bloco_4C:
         numero_sala, protocolo, conteudo_sala = resultado
