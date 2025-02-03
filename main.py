@@ -1,8 +1,9 @@
 import subprocess
 import pyautogui
 import sys
-import time
 import os
+import Minas_Bank
+import time 
 from Tocantins import Tocantins
 from Monte_Libano import Monte_libano
 from Lyceu import Lyceu
@@ -32,6 +33,7 @@ from Bahia_Blanca import Bahia_blanca
 from Buena_Vista import Buena_vista
 from Clave import Clave_do_Sol
 from NW_FR import New_World_FR
+from Minas_Bank import Minas
 
 
 def abrir_programa(program_path):
@@ -107,6 +109,7 @@ condominios = {
     "monte libano": Monte_libano,
     "tocantins": Tocantins,
     "nw fd reserva": New_World_FR,
+    "minas": Minas,
     # Adicione outros condomínios conforme necessário
 }
 
