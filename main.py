@@ -3,7 +3,7 @@ import pyautogui
 import sys
 import os
 import Minas_Bank
-import time 
+import time
 from Tocantins import Tocantins
 from Monte_Libano import Monte_libano
 from Lyceu import Lyceu
@@ -19,6 +19,7 @@ from Anna_Luiza import Anna_Luiza
 from Anna_Luiza_Rateio import Anna_Luiza_Rateio
 from Capixaba import Capixaba
 from JK import Juscelino_Kubitschek
+from JK_FR import Juscelino_Kubitschek_FR
 from NW import New_World
 from Acres import Acres
 from Prive import Prive
@@ -34,6 +35,8 @@ from Buena_Vista import Buena_vista
 from Clave import Clave_do_Sol
 from NW_FR import New_World_FR
 from Minas_Bank import Minas
+
+# Função que abrirá a BIOS no computador
 
 
 def abrir_programa(program_path):
@@ -84,6 +87,7 @@ condominios = {
     "anna luiza rateio": Anna_Luiza_Rateio,
     "capixaba": Capixaba,
     "jk": Juscelino_Kubitschek,
+    "jk fd reserva": Juscelino_Kubitschek_FR,
     "nw": New_World,
     "acres": Acres,
     "prive": Prive,
@@ -115,6 +119,16 @@ condominios = {
 
 # Agora vamos para as ações na BIOS
 pyautogui.PAUSE = 1
+
+# Abrindo a Bios
+abrir_programa(program_path)
+
+# Colocando a Senha na Bios primeira vez
+time.sleep(8)
+pyautogui.click(x=367, y=41)
+pyautogui.write("725725")
+pyautogui.press("Enter")
+time.sleep(10)
 
 # Abrindo a Bios
 abrir_programa(program_path)

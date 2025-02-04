@@ -1,8 +1,8 @@
 import fitz  # PyMuPDF
 import re
 
-# Substitua 'jk.pdf' pelo caminho correto do seu arquivo
-arquivo = 'jk.pdf'
+# Substitua 'jkF.pdf' pelo caminho correto do seu arquivo
+arquivo = 'jk fd reserva.pdf'
 pdf = fitz.open(arquivo)
 lista_texto_paginas = []  # Lista para armazenar o texto de cada página
 for pagina in pdf:  # Percorre todas as páginas do documento
@@ -33,16 +33,16 @@ else:
 padrao_depositos = r"DEPÓSITO SUBSOLO (\d)\n.*?\nApto:\n(\d+)\n(\d+,\d{2})"
 resultados = re.findall(padrao_depositos, texto_pdf, flags=re.DOTALL)
 
-padrao_salas = r"JK (\d{4}(?:-\d{2,4})?)\s.*?Apto:\s*(\d+)(.*?)(?=\nJK |\Z)"
+padrao_salas = r"JKF (\d{4}(?:-\d{2,4})?)\s.*?Apto:\s*(\d+)(.*?)(?=\nJKF |\Z)"
 resultados_salas = re.findall(padrao_salas, texto_pdf, flags=re.DOTALL)
 
 # Supondo que `texto_pdf` seja a string com o conteúdo do PDF.
-padrao_bistro = r"(JK BISTRÔ.*?Apto:\s*\d+.*?)(?=JKG|$)"
+padrao_bistro = r"(JKF BISTRÔ.*?Apto:\s*\d+.*?)(?=JKF G|$)"
 
 resultados_bistro = re.findall(padrao_bistro, texto_pdf, flags=re.DOTALL)
 
 # Expressão regular para capturar a seção de cada garagem
-padrao_garagens = r"JKG\s+(\d+).*?Apto:\s*(\d+)(.*?)(?=JKG|Total:|$)"
+padrao_garagens = r"JKF G\s+(\d+).*?Apto:\s*(\d+)(.*?)(?=JKF G|Total:|$)"
 secoes_garagem = re.findall(padrao_garagens, texto_pdf, flags=re.DOTALL)
 
 for resultado in resultados_salas:
