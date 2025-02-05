@@ -1,26 +1,105 @@
-import tkinter as tk
-from tkinter import messagebox
+import customtkinter
+import subprocess
+import sys
+import os
+from PIL import Image
 
-def mostrar_mensagem():
-    nome = entrada.get()
-    messagebox.showinfo("Saudação", f"Olá, {nome}!")
+# Variável global para controle do processo
+processo = None
+janela_parar = None
 
-# Criar a janela principal
-janela = tk.Tk()
-janela.title("Meu Aplicativo")
-janela.geometry("300x200")
+# Caminho das imagens
+imagem_iniciar_path = r"G:/.shortcut-targets-by-id/1L8mtc49bUfLN6TTzX2wnBPxiLWDg6YSF/SALVAR/BD_BIOS/BD_BIOS/BORDEROS/TESTE/Imagens/botao-play.png"
+imagem_pausar_path = r"G:/.shortcut-targets-by-id/1L8mtc49bUfLN6TTzX2wnBPxiLWDg6YSF/SALVAR/BD_BIOS/BD_BIOS/BORDEROS/TESTE/Imagens/botao-pausa.png"
 
-# Criar um rótulo
-rotulo = tk.Label(janela, text="Digite seu nome:")
-rotulo.pack(pady=10)
+# Iniciando imagens
+imagem_iniciar = customtkinter.CTkImage(
+    light_image=Image.open(imagem_iniciar_path),
+    dark_image=Image.open(imagem_iniciar_path),
+    size=(30, 30)
+)
 
-# Criar um campo de entrada
-entrada = tk.Entry(janela)
-entrada.pack(pady=10)
+imagem_pausar = customtkinter.CTkImage(
+    light_image=Image.open(imagem_pausar_path),
+    dark_image=Image.open(imagem_pausar_path),
+    size=(30, 30)
+)
 
-# Criar um botão
-botao = tk.Button(janela, text="Saudar", command=mostrar_mensagem)
-botao.pack(pady=10)
+# Função para iniciar a main.py
+def iniciar_main():
+    global processo, janela_parar  # Adicionando global para que a variável seja reconhecida corretamente
+    if processo is None:
 
-# Iniciar o loop da interface
-janela.mainloop()
+        app.iconify()
+
+        # Criar uma janela pequena com botão "PARAR"
+        janela_parar = customtkinter.CTkToplevel(app)
+        janela_parar.geometry("500x300")
+        janela_parar.title("Parar")
+        janela_parar.resizable(False, False)
+        janela_parar.attributes("-topmost", True)
+
+        botao_parar = customtkinter.CTkButton(
+            janela_parar, text="PARAR", fg_color="#a83232", image=imagem_pausar, font=("Arial", 15),
+            command=parar_main
+        )
+        botao_parar.pack(pady=20)
+
+        # Manter janela sempre visível
+        def manter_topo():
+            global janela_parar  # Adicionando global aqui também
+            if processo is not None and janela_parar is not None:
+                janela_parar.lift()
+                janela_parar.attributes("-topmost", True)
+                janela_parar.after(500, manter_topo)
+
+        manter_topo()
+
+# Função para parar a main.py
+def parar_main():
+    global processo, janela_parar
+    if processo is not None:
+        processo.terminate()  # Encerra o processo
+        processo = None  # Reseta a variável
+
+        # Fechar a janela "PARAR"
+        if janela_parar is not None:
+            janela_parar.destroy()
+            janela_parar = None
+
+        # Restaurar a tela principal
+        app.deiconify()
+
+
+# Configuração da interface principal
+customtkinter.set_appearance_mode("dark")
+app = customtkinter.CTk()
+app.geometry("800x500")
+app.title("Lançamento Automático na BIOS")
+
+# Criando o Título:
+titulo = customtkinter.CTkLabel(
+    app, text="Lançamentos Automáticos", font=("Arial", 20, "bold"))
+titulo.pack(pady=20)
+
+# Botão para iniciar
+titulo_botao_iniciar = customtkinter.CTkLabel(
+    app, text="Iniciar programa", font=("Arial", 20))
+titulo_botao_iniciar.pack(pady=(50, 0))
+
+botao_iniciar = customtkinter.CTkButton(
+    app, text="INICIAR", fg_color="#1c5052", image=imagem_iniciar, font=("Arial", 15), command=iniciar_main
+)
+botao_iniciar.pack(pady=20)
+
+# Botão para parar
+titulo_botao_parar = customtkinter.CTkLabel(
+    app, text="Parar programa", font=("Arial", 20))
+titulo_botao_parar.pack(pady=(50, 0))
+
+botao_parar = customtkinter.CTkButton(
+    app, text="PARAR", fg_color="#1c5052", image=imagem_pausar, font=("Arial", 15), command=parar_main
+)
+botao_parar.pack(pady=20)
+
+app.mainloop()
