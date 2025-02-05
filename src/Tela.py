@@ -26,15 +26,18 @@ imagem_pausar = customtkinter.CTkImage(
 )
 
 # Função para iniciar a main.py
-def iniciar_main():
-    global processo, janela_parar  # Adicionando global para que a variável seja reconhecida corretamente
-    if processo is None:
 
+
+def iniciar_main():
+    # Adicionando global para que a variável seja reconhecida corretamente
+    global processo, janela_parar
+    if processo is None:
+        processo = subprocess.Popen([sys.executable, "main.py"])
         app.iconify()
 
         # Criar uma janela pequena com botão "PARAR"
         janela_parar = customtkinter.CTkToplevel(app)
-        janela_parar.geometry("500x300")
+        janela_parar.geometry("190x80+820+0")
         janela_parar.title("Parar")
         janela_parar.resizable(False, False)
         janela_parar.attributes("-topmost", True)
@@ -56,6 +59,8 @@ def iniciar_main():
         manter_topo()
 
 # Função para parar a main.py
+
+
 def parar_main():
     global processo, janela_parar
     if processo is not None:
