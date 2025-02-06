@@ -1,3 +1,34 @@
+from condominios.Tocantins import Tocantins
+from condominios.Monte_Libano import Monte_libano
+from condominios.Lyceu import Lyceu
+from condominios.Indiapora_Rateio import Indiapora_rateio
+from condominios.Indiapora import Indiapora
+from condominios.Bello import Bello_Trindade
+from condominios.Ilha_Bela import Ilha_bela
+from condominios.Ingrid import Ingred_Bergman
+from condominios.Marcela import Marcela
+from condominios.Mirante import Mirante_do_Bosque
+from condominios.DJ import Dj_oliveira
+from condominios.Anna_Luiza import Anna_Luiza
+from condominios.Anna_Luiza_Rateio import Anna_Luiza_Rateio
+from condominios.Capixaba import Capixaba
+from condominios.JK import Juscelino_Kubitschek
+from condominios.JK_FR import Juscelino_Kubitschek_FR
+from condominios.NW import New_World
+from condominios.Acres import Acres
+from condominios.Prive import Prive
+from condominios.Verde import Verde
+from condominios.Gardenia import Gardenia
+from condominios.Harvard import Harvard
+from condominios.Icaro import Icaro
+from condominios.Jacuma import Jacuma
+from condominios.Aldeia import Aldeia_bueno
+from condominios.Bahamas import Bahamas
+from condominios.Bahia_Blanca import Bahia_blanca
+from condominios.Buena_Vista import Buena_vista
+from condominios.Clave import Clave_do_Sol
+from condominios.NW_FR import New_World_FR
+from condominios.Minas_Bank import Minas
 import subprocess
 import pyautogui
 import sys
@@ -11,39 +42,10 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(BASE_DIR)
 
 # Importando cada condomínio ao código principal
-from condominios.Minas_Bank import Minas
-from condominios.NW_FR import New_World_FR
-from condominios.Clave import Clave_do_Sol
-from condominios.Buena_Vista import Buena_vista
-from condominios.Bahia_Blanca import Bahia_blanca
-from condominios.Bahamas import Bahamas
-from condominios.Aldeia import Aldeia_bueno
-from condominios.Jacuma import Jacuma
-from condominios.Icaro import Icaro
-from condominios.Harvard import Harvard
-from condominios.Gardenia import Gardenia
-from condominios.Verde import Verde
-from condominios.Prive import Prive
-from condominios.Acres import Acres
-from condominios.NW import New_World
-from condominios.JK_FR import Juscelino_Kubitschek_FR
-from condominios.JK import Juscelino_Kubitschek
-from condominios.Capixaba import Capixaba
-from condominios.Anna_Luiza_Rateio import Anna_Luiza_Rateio
-from condominios.Anna_Luiza import Anna_Luiza
-from condominios.DJ import Dj_oliveira
-from condominios.Mirante import Mirante_do_Bosque
-from condominios.Marcela import Marcela
-from condominios.Ingrid import Ingred_Bergman
-from condominios.Ilha_Bela import Ilha_bela
-from condominios.Bello import Bello_Trindade
-from condominios.Indiapora import Indiapora
-from condominios.Indiapora_Rateio import Indiapora_rateio
-from condominios.Lyceu import Lyceu
-from condominios.Monte_Libano import Monte_libano
-from condominios.Tocantins import Tocantins
 
 # Função que abrirá a BIOS no computador
+
+
 def abrir_programa(program_path):
     try:
         # Verifica se o arquivo existe no caminho especificado
@@ -168,3 +170,6 @@ for pdf in arquivos_pdf:
             print(f"Erro ao remover o arquivo {pdf}: {e.strerror}")
     else:
         print("Condomínio não encontrado:", nome_condominio)
+
+if __name__ == "__main__":
+    main()
