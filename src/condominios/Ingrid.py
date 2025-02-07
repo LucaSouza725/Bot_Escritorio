@@ -2,87 +2,107 @@ from datetime import datetime, timedelta
 import fitz  # PyMuPDF
 import re
 import pyautogui
+import os
+import sys
 
+# Obtém o diretório da pasta `src`
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-def Ingred_Bergman(arquivo):
-    arquivo = 'ingrid.pdf'
-    pdf = fitz.open(arquivo)
-    lista_texto_paginas = []  # Lista para armazenar o texto de cada página
-    for pagina in pdf:  # Percorre todas as páginas do documento
-        texto = pagina.get_text()
-        lista_texto_paginas.append(texto)  # Adiciona o texto da página à lista
-    # Combina o texto de todas as páginas
-    texto_pdf = ''.join(lista_texto_paginas)
+# Adiciona `src` ao caminho de importação
+sys.path.append(BASE_DIR)
 
-    # Expressão regular para encontrar a data de vencimento (formato mm/aaaa)
-    padrao_referencia_mensal = r"\b(\d{2})/(\d{4})\b"
-    mes_referencia = re.search(padrao_referencia_mensal, texto_pdf)
+# Importação do módulo
+from condominios.pdf_manager import get_pdf_path
 
-    if mes_referencia:
-        mes, ano = mes_referencia.groups()  # Extrai o mês e o ano como grupos
+def Ingred_Bergman(pdf_filename):
+    pdf_filename = 'ingrid.pdf'
+    pdf_path = get_pdf_path(pdf_filename)
 
-        # Converte para datetime para facilitar a manipulação da data
-        # Retrocede um dia para obter o mês anterior
-        data_referencia = datetime(int(ano), int(mes), 1) - timedelta(days=1)
-        # Formata para o mês de referência atrasado (mmYYYY)
-        mes_referencia_atrasado = data_referencia.strftime('%m%Y')
-
-        # Define o dia de vencimento como 03
-        dia_vencimento = "20"
-
-        # Usa o ano e mês originais para a data de vencimento
-        data_vencimento = f"{dia_vencimento}{mes}{ano}"
-
-        print(f"Mês de referência atrasado: {mes_referencia_atrasado}")
-        print(f"Data de Vencimento: {data_vencimento}")
+    # Verifica se o arquivo existe antes de tentar abrir
+    if not os.path.exists(pdf_path):
+        print(f"ERRO: O arquivo {pdf_filename} não foi encontrado no caminho: {pdf_path}")
     else:
-        print("Data de vencimento não encontrada.")
+        # Abrindo o PDF
+        with fitz.open(pdf_path) as pdf:
+            lista_texto_paginas = []  # Lista para armazenar o texto de cada página
+            
+            # Percorre todas as páginas do documento
+            for pagina in pdf:
+                texto = pagina.get_text()
+                lista_texto_paginas.append(texto)  # Adiciona o texto da página à lista
+            
+            # Combina o texto de todas as páginas
+            texto_pdf = ''.join(lista_texto_paginas)
 
-    # Expressão regular para capturar as salas, valores e borderos
-    # Expressão regular atualizada para capturar as seções com base na palavra "Apto:"
-    secoes = re.split(r'Apto:\s*\n', texto_pdf)
+        # Expressão regular para encontrar a data de vencimento (formato mm/aaaa)
+        padrao_referencia_mensal = r"\b(\d{2})/(\d{4})\b"
+        mes_referencia = re.search(padrao_referencia_mensal, texto_pdf)
 
-    padrao_valores = r"(\d{1,3}(?:\.\d{3})*,\d{2})"
-    # Atualizado para capturar o número completo do apartamento
-    padrao_apto = r"(\d{16})"
+        if mes_referencia:
+            mes, ano = mes_referencia.groups()  # Extrai o mês e o ano como grupos
 
-    # Escolhendo o condomínio, mês de referência, e data de vencimento
-    pyautogui.PAUSE = 2
-    pyautogui.press('f5')
-    pyautogui.press('down')
-    pyautogui.press('enter')
-    pyautogui.write('27')
-    pyautogui.press('enter', presses=2)
-    pyautogui.click(x=426, y=302)
-    # Inserindo um novo condomínio/ou bloco na Bios
-    pyautogui.PAUSE = 1.5
-    pyautogui.click(x=510, y=298)
-    pyautogui.write('27')
-    pyautogui.press('Enter')
-    pyautogui.write(mes)
-    pyautogui.write(ano)
-    pyautogui.press('Enter')
-    pyautogui.write(data_vencimento)
-    pyautogui.press('Enter')
-    pyautogui.click(x=799, y=298)
-    pyautogui.click(x=152, y=365)
+            # Converte para datetime para facilitar a manipulação da data
+            # Retrocede um dia para obter o mês anterior
+            data_referencia = datetime(int(ano), int(mes), 1) - timedelta(days=1)
+            # Formata para o mês de referência atrasado (mmYYYY)
+            mes_referencia_atrasado = data_referencia.strftime('%m%Y')
 
-    pyautogui.PAUSE = 0.5
+            # Define o dia de vencimento como 03
+            dia_vencimento = "20"
 
-    for i, secao in enumerate(secoes[1:], start=1):  # Começa da segunda seção
-        apto_match = re.search(padrao_apto, secao)
-        valores = re.findall(padrao_valores, secao)
+            # Usa o ano e mês originais para a data de vencimento
+            data_vencimento = f"{dia_vencimento}{mes}{ano}"
 
-        if apto_match and valores:
-            protocolo = apto_match.group(1).lstrip('0')
-            valor_total = valores[-2] if i == len(
-                secoes[1:]) and len(valores) > 1 else valores[-1]
+            print(f"Mês de referência atrasado: {mes_referencia_atrasado}")
+            print(f"Data de Vencimento: {data_vencimento}")
+        else:
+            print("Data de vencimento não encontrada.")
 
-            pyautogui.write(f"{i:02}00")  # Formata i com dois dígitos
-            pyautogui.press('Enter')
-            pyautogui.write(f"000{protocolo}")
-            pyautogui.press('Enter')
-            pyautogui.write(valor_total)
-            pyautogui.press('Enter')
-            pyautogui.press('down', presses=2)
-            pyautogui.press('left', presses=4)
+        # Expressão regular para capturar as salas, valores e borderos
+        # Expressão regular atualizada para capturar as seções com base na palavra "Apto:"
+        secoes = re.split(r'Apto:\s*\n', texto_pdf)
+
+        padrao_valores = r"(\d{1,3}(?:\.\d{3})*,\d{2})"
+        # Atualizado para capturar o número completo do apartamento
+        padrao_apto = r"(\d{16})"
+
+        # Escolhendo o condomínio, mês de referência, e data de vencimento
+        pyautogui.PAUSE = 2
+        pyautogui.press('f5')
+        pyautogui.press('down')
+        pyautogui.press('enter')
+        pyautogui.write('27')
+        pyautogui.press('enter', presses=2)
+        pyautogui.click(x=426, y=302)
+        # Inserindo um novo condomínio/ou bloco na Bios
+        pyautogui.PAUSE = 1.5
+        pyautogui.click(x=510, y=298)
+        pyautogui.write('27')
+        pyautogui.press('Enter')
+        pyautogui.write(mes)
+        pyautogui.write(ano)
+        pyautogui.press('Enter')
+        pyautogui.write(data_vencimento)
+        pyautogui.press('Enter')
+        pyautogui.click(x=799, y=298)
+        pyautogui.click(x=152, y=365)
+
+        pyautogui.PAUSE = 0.5
+
+        for i, secao in enumerate(secoes[1:], start=1):  # Começa da segunda seção
+            apto_match = re.search(padrao_apto, secao)
+            valores = re.findall(padrao_valores, secao)
+
+            if apto_match and valores:
+                protocolo = apto_match.group(1).lstrip('0')
+                valor_total = valores[-2] if i == len(
+                    secoes[1:]) and len(valores) > 1 else valores[-1]
+
+                pyautogui.write(f"{i:02}00")  # Formata i com dois dígitos
+                pyautogui.press('Enter')
+                pyautogui.write(f"000{protocolo}")
+                pyautogui.press('Enter')
+                pyautogui.write(valor_total)
+                pyautogui.press('Enter')
+                pyautogui.press('down', presses=2)
+                pyautogui.press('left', presses=4)

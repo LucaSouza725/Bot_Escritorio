@@ -4,13 +4,14 @@ import sys
 import os
 import time
 
-# Obtém o caminho absoluto da pasta 'src'
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Obtém o caminho absoluto da pasta onde o script está rodando
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Adiciona a pasta onde "condominios" está ao sys.path
+sys.path.append(os.path.join(BASE_DIR, '..'))  # Ajusta conforme necessário
+
+# Agora importa o pdf_manager corretamente
 from condominios.pdf_manager import get_pdf_path
-
-# Adiciona 'src' ao sys.path para que os imports funcionem
-sys.path.insert(0, BASE_DIR)
 
 # Iniciando todos os condomínios
 from src.condominios.Tocantins import Tocantins
@@ -137,6 +138,9 @@ abrir_programa(program_path)
 # Colocando a Senha na Bios
 time.sleep(8)
 pyautogui.click(x=367, y=41)
+pyautogui.press('tab')
+pyautogui.write('LUCAS@seguranca')
+pyautogui.press('enter')
 pyautogui.write("725725")
 pyautogui.press("Enter")
 time.sleep(10)

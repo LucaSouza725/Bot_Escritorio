@@ -2,7 +2,17 @@ from PyPDF2 import PdfReader
 import re
 from datetime import datetime
 import pyautogui
+import os
+import sys
 
+# Obtém o diretório da pasta `src`
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Adiciona `src` ao caminho de importação
+sys.path.append(BASE_DIR)
+
+# Importação do módulo
+from condominios.pdf_manager import get_pdf_path
 
 def Capixaba(capixaba):
     # Abrindo o PDF do Capixaba
