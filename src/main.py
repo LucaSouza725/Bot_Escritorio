@@ -1,51 +1,48 @@
-from condominios.Tocantins import Tocantins
-from condominios.Monte_Libano import Monte_libano
-from condominios.Lyceu import Lyceu
-from condominios.Indiapora_Rateio import Indiapora_rateio
-from condominios.Indiapora import Indiapora
-from condominios.Bello import Bello_Trindade
-from condominios.Ilha_Bela import Ilha_bela
-from condominios.Ingrid import Ingred_Bergman
-from condominios.Marcela import Marcela
-from condominios.Mirante import Mirante_do_Bosque
-from condominios.DJ import Dj_oliveira
-from condominios.Anna_Luiza import Anna_Luiza
-from condominios.Anna_Luiza_Rateio import Anna_Luiza_Rateio
-from condominios.Capixaba import Capixaba
-from condominios.JK import Juscelino_Kubitschek
-from condominios.JK_FR import Juscelino_Kubitschek_FR
-from condominios.NW import New_World
-from condominios.Acres import Acres
-from condominios.Prive import Prive
-from condominios.Verde import Verde
-from condominios.Gardenia import Gardenia
-from condominios.Harvard import Harvard
-from condominios.Icaro import Icaro
-from condominios.Jacuma import Jacuma
-from condominios.Aldeia import Aldeia_bueno
-from condominios.Bahamas import Bahamas
-from condominios.Bahia_Blanca import Bahia_blanca
-from condominios.Buena_Vista import Buena_vista
-from condominios.Clave import Clave_do_Sol
-from condominios.NW_FR import New_World_FR
-from condominios.Minas_Bank import Minas
+from src.condominios.Tocantins import Tocantins
+from src.condominios.Monte_Libano import Monte_libano
+from src.condominios.Lyceu import Lyceu
+from src.condominios.Indiapora_Rateio import Indiapora_rateio
+from src.condominios.Indiapora import Indiapora
+from src.condominios.Bello import Bello_Trindade
+from src.condominios.Ilha_Bela import Ilha_bela
+from src.condominios.Ingrid import Ingred_Bergman
+from src.condominios.Marcela import Marcela
+from src.condominios.Mirante import Mirante_do_Bosque
+from src.condominios.DJ import Dj_oliveira
+from src.condominios.Anna_Luiza import Anna_Luiza
+from src.condominios.Anna_Luiza_Rateio import Anna_Luiza_Rateio
+from src.condominios.Capixaba import Capixaba
+from src.condominios.JK import Juscelino_Kubitschek
+from src.condominios.JK_FR import Juscelino_Kubitschek_FR
+from src.condominios.NW import New_World
+from src.condominios.Acres import Acres
+from src.condominios.Prive import Prive
+from src.condominios.Verde import Verde
+from src.condominios.Gardenia import Gardenia
+from src.condominios.Harvard import Harvard
+from src.condominios.Icaro import Icaro
+from src.condominios.Jacuma import Jacuma
+from src.condominios.Aldeia import Aldeia_bueno
+from src.condominios.Bahamas import Bahamas
+from src.condominios.Bahia_Blanca import Bahia_blanca
+from src.condominios.Buena_Vista import Buena_vista
+from src.condominios.Clave import Clave_do_Sol
+from src.condominios.NW_FR import New_World_FR
+from src.condominios.Minas_Bank import Minas
 import subprocess
 import pyautogui
 import sys
 import os
 import time
 
-# Obtém o diretório raiz do projeto
+# Obtém o caminho absoluto da pasta 'src'
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-# Adiciona o diretório `src` ao sys.path
-sys.path.append(BASE_DIR)
+# Adiciona 'src' ao sys.path para que os imports funcionem
+sys.path.insert(0, BASE_DIR)
 
-# Importando cada condomínio ao código principal
 
 # Função que abrirá a BIOS no computador
-
-
 def abrir_programa(program_path):
     try:
         # Verifica se o arquivo existe no caminho especificado
@@ -170,6 +167,3 @@ for pdf in arquivos_pdf:
             print(f"Erro ao remover o arquivo {pdf}: {e.strerror}")
     else:
         print("Condomínio não encontrado:", nome_condominio)
-
-if __name__ == "__main__":
-    main()
