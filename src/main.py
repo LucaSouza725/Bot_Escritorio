@@ -1,3 +1,18 @@
+import subprocess
+import pyautogui
+import sys
+import os
+import time
+
+# Obtém o caminho absoluto da pasta 'src'
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+from condominios.pdf_manager import get_pdf_path
+
+# Adiciona 'src' ao sys.path para que os imports funcionem
+sys.path.insert(0, BASE_DIR)
+
+# Iniciando todos os condomínios
 from src.condominios.Tocantins import Tocantins
 from src.condominios.Monte_Libano import Monte_libano
 from src.condominios.Lyceu import Lyceu
@@ -29,17 +44,6 @@ from src.condominios.Buena_Vista import Buena_vista
 from src.condominios.Clave import Clave_do_Sol
 from src.condominios.NW_FR import New_World_FR
 from src.condominios.Minas_Bank import Minas
-import subprocess
-import pyautogui
-import sys
-import os
-import time
-
-# Obtém o caminho absoluto da pasta 'src'
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-# Adiciona 'src' ao sys.path para que os imports funcionem
-sys.path.insert(0, BASE_DIR)
 
 
 # Função que abrirá a BIOS no computador
@@ -66,17 +70,20 @@ program_path = r"C:\BIOS INFO\BIOSFin.exe"
 
 
 def listar_pdfs():
-    # Esta função lista todos os arquivos PDFs na pasta atual
-    diretorio = os.getcwd()
-    arquivos = os.listdir(diretorio)
+    # Obtém o diretório da pasta 'documents'
+    documentos_dir = os.path.join(os.path.dirname(__file__), '..', 'resources', 'documents')
+    arquivos = os.listdir(documentos_dir)
+
     # Filtra apenas os PDFs
     arquivos_pdf = [
-        arquivo for arquivo in arquivos if arquivo.endswith('.pdf')]
+        get_pdf_path(arquivo) for arquivo in arquivos if arquivo.endswith('.pdf')
+    ]
     return arquivos_pdf
 
 
 def extrair_nome(nome_arquivo):
-    # Extrai o nome do condomínio do nome do arquivo
+    # Extrai o nome do condomínio do nome do arquivo (sem o caminho completo)
+    nome_arquivo = os.path.basename(nome_arquivo)  # Pega apenas o nome do arquivo
     return nome_arquivo.replace(".pdf", "")
 
 
@@ -127,16 +134,6 @@ pyautogui.PAUSE = 1
 # Abrindo a Bios
 abrir_programa(program_path)
 
-# Colocando a Senha na Bios primeira vez
-time.sleep(8)
-pyautogui.click(x=367, y=41)
-pyautogui.write("725725")
-pyautogui.press("Enter")
-time.sleep(10)
-
-# Abrindo a Bios
-abrir_programa(program_path)
-
 # Colocando a Senha na Bios
 time.sleep(8)
 pyautogui.click(x=367, y=41)
@@ -152,13 +149,12 @@ pyautogui.press('3')
 pyautogui.press('4')
 # Processa cada arquivo PDF na lista
 for pdf in arquivos_pdf:
-    # Obtem o nome do condominio a partir do nome do arquivo
+    # Obtem o nome do condomínio a partir do nome do arquivo
     nome_condominio = extrair_nome(pdf)
-    # Verifica se o Condomínio está no
-    # Dicionário
+    # Verifica se o Condomínio está no Dicionário
     if nome_condominio in condominios:
         # Processa o arquivo PDF com a função correspondente ao condomínio
-        condominios[nome_condominio](pdf)
+        condominios[nome_condominio](pdf)  # Passando o caminho completo do PDF
         # Remove o arquivo PDF após processá-lo
         try:
             os.remove(pdf)

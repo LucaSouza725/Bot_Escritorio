@@ -9,7 +9,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # Adiciona `src` ao caminho de importação
 sys.path.append(BASE_DIR)
 
-# Agora importa o módulo
+# Importação do módulo
 from condominios.pdf_manager import get_pdf_path
 
 # Nome do arquivo PDF
