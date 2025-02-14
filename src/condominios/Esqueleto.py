@@ -1,4 +1,5 @@
 import fitz  # PyMuPDF
+from datetime import datetime, timedelta
 import re
 import os
 import sys
@@ -13,7 +14,7 @@ sys.path.append(BASE_DIR)
 from condominios.pdf_manager import get_pdf_path
 
 # Nome do arquivo PDF
-pdf_filename = "minas.pdf"
+pdf_filename = "capixaba.pdf"
 
 # Obtendo o caminho do PDF
 pdf_path = get_pdf_path(pdf_filename)
@@ -38,30 +39,39 @@ else:
         padrao_referencia_mensal = r"\b(\d{2}/\d{4})\b"
         mes_referencia = re.search(padrao_referencia_mensal, texto_pdf)
 
-        # ATENÇÃO: o mês de referência é adiantado
+        # Expressão regular para encontrar a data de vencimento (formato mm/aaaa)
+        # ATENÇÃO: o mês de referência é atrasado
+        padrao_referencia_mensal = r"\b(\d{2})/(\d{4})\b"
+        mes_referencia = re.search(padrao_referencia_mensal, texto_pdf)
+
         if mes_referencia:
-            # Extrai o mês e o ano
-            mes, ano = mes_referencia.group().split('/')
+            mes, ano = mes_referencia.groups()  # Extrai o mês e o ano como grupos
 
-            # Define o dia de vencimento como 10
-            dia_vencimento = "10"
+            # Converte para datetime para facilitar a manipulação da data
+            # Retrocede um dia para obter o mês anterior
+            data_referencia = datetime(int(ano), int(mes), 1) - timedelta(days=1)
+            # Formata para o mês de referência atrasado (mmYYYY)
+            mes_referencia_atrasado = data_referencia.strftime('%m%Y')
 
-            # Formata a data de vencimento no formato ddmmaaaa
+            # Define o dia de vencimento como 03
+            dia_vencimento = "15"
+
+            # Usa o ano e mês originais para a data de vencimento
             data_vencimento = f"{dia_vencimento}{mes}{ano}"
 
-            print(f"Mês de referência: {mes}{ano}")
-            print(f"Data de Vencimento armazenada como: {data_vencimento}")
+            print(f"Mês de referência atrasado: {mes_referencia_atrasado}")
+            print(f"Data de Vencimento: {data_vencimento}")
         else:
             print("Data de vencimento não encontrada.")
 
-        padrao_salas = r"SL (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=SL | Total:|$)"
+        padrao_salas = r"Casa: (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=Casa:| Total:|$)"
         resultados_salas = re.findall(padrao_salas, texto_pdf, flags=re.DOTALL)
 
         for resultado in resultados_salas:
             numero_sala, protocolo, conteudo_sala = resultado
 
             # Formata o número da sala para ter 4 dígitos
-            numero_sala_formatado = numero_sala.zfill(4)
+            numero_sala_formatado = numero_sala.zfill(2)
 
             # Extraindo todos os valores numéricos da seção capturada
             valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)

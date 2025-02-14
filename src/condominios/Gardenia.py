@@ -48,7 +48,7 @@ def Gardenia(pdf_filename):
             # Formata para o mês de referência atrasado (mmYYYY)
             mes_referencia_atrasado = data_referencia.strftime('%m%Y')
 
-            # Define o dia de vencimento como 03
+            # Define o dia de vencimento como 05
             dia_vencimento = "05"
 
             # Usa o ano e mês originais para a data de vencimento
@@ -128,11 +128,8 @@ def Gardenia(pdf_filename):
 
             # Modificando o protocolo para remover os zeros à esquerda
             protocolo = protocolo.lstrip('0')
-
             numero_sala = numero_sala.lstrip('0')
-
             numero_sala = numero_sala.lstrip('0')
-
             numero_sala = numero_sala.lstrip('0')
 
             # Extraindo todos os valores numéricos da seção capturada
@@ -175,11 +172,8 @@ def Gardenia(pdf_filename):
             numero_sala, protocolo, conteudo_sala = resultado
 
             protocolo = protocolo.lstrip('0')
-
             numero_sala = numero_sala.lstrip('0')
-
             numero_sala = numero_sala.lstrip('0')
-
             numero_sala = numero_sala.lstrip('0')
 
             valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)

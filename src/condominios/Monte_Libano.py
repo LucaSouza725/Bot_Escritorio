@@ -95,7 +95,7 @@ def Monte_libano(pdf_filename):
             valor_total = valores[-1] if valores else "Valor não encontrado"
 
             pyautogui.PAUSE = 0.5
-            pyautogui.write(numero_sala)
+            pyautogui.write("LJ "+numero_sala)
             pyautogui.press('Enter')
             pyautogui.write(protocolo)
             pyautogui.press('Enter')

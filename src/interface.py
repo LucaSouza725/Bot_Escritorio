@@ -9,8 +9,8 @@ processo = None
 janela_parar = None
 
 # Caminho das imagens
-imagem_iniciar_path = r"C:/Users/TERMINAL 03/Transmissão no Google Drive/Meu Drive/SEGURANCA CONTABILIDADE/SISTEMAS/Meu_Projeto/resources/imagens/botao-play.png"
-imagem_pausar_path = r"C:/Users/TERMINAL 03/Transmissão no Google Drive/Meu Drive/SEGURANCA CONTABILIDADE/SISTEMAS/Meu_Projeto/resources/imagens/botao-pausa.png"
+imagem_iniciar_path = r"C:/Projeto/Meu_projeto/resources/imagens/botao-play.png"
+imagem_pausar_path = r"C:/Projeto/Meu_projeto/resources/imagens/botao-pausa.png"
 
 # Iniciando imagens
 imagem_iniciar = customtkinter.CTkImage(
