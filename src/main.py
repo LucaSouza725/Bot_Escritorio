@@ -45,6 +45,7 @@ from src.condominios.Buena_Vista import Buena_vista
 from src.condominios.Clave import Clave_do_Sol
 from src.condominios.NW_FR import New_World_FR
 from src.condominios.Minas_Bank import Minas
+from src.condominios.Primavera import Primavera
 
 
 # Função que abrirá a BIOS no computador
@@ -126,6 +127,7 @@ condominios = {
     "tocantins": Tocantins,
     "nw fd reserva": New_World_FR,
     "minas": Minas,
+    "primavera": Primavera,
     # Adicione outros condomínios conforme necessário
 }
 

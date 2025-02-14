@@ -14,7 +14,7 @@ sys.path.append(BASE_DIR)
 from condominios.pdf_manager import get_pdf_path
 
 # Nome do arquivo PDF
-pdf_filename = "capixaba.pdf"
+pdf_filename = "primavera.pdf"
 
 # Obtendo o caminho do PDF
 pdf_path = get_pdf_path(pdf_filename)
@@ -64,14 +64,110 @@ else:
         else:
             print("Data de vencimento não encontrada.")
 
-        padrao_salas = r"Casa: (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=Casa:| Total:|$)"
-        resultados_salas = re.findall(padrao_salas, texto_pdf, flags=re.DOTALL)
+        padrao_PA = r"P-A (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=P-A| Total:|$)"
+        resultados_salas_PA = re.findall(padrao_PA, texto_pdf, flags=re.DOTALL)
+        
+        padrao_PB = r"P-B (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=P-B| Total:|$)"
+        resultados_salas_PB = re.findall(padrao_PA, texto_pdf, flags=re.DOTALL)
+        
+        padrao_PA = r"P-C (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=P-C| Total:|$)"
+        resultados_salas_PC = re.findall(padrao_PA, texto_pdf, flags=re.DOTALL)
+ 
+        padrao_PA = r"P-D (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=P-D| Total:|$)"
+        resultados_salas_PD = re.findall(padrao_PA, texto_pdf, flags=re.DOTALL)
+        
+        padrao_salas = r"SL (?:LJ )?(\d+|[\d]{4}(?:[-/][\d]{1,4})*)\s.*?Apto:\s*(\d+)(.*?)(?=SL| Total:|$)"
+        resultados_salas = re.findall(padrao_salas, texto_pdf, flags=re.DOTALL)      
+
+        for resultado in resultados_salas_PA:
+            numero_sala, protocolo, conteudo_sala = resultado
+
+            # Formata o número da sala para ter 4 dígitos
+            numero_sala_formatado = numero_sala.zfill(4)
+
+            # Extraindo todos os valores numéricos da seção capturada
+            valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)
+
+            # Excluindo o último valor numérico se ele pertencer ao total geral e não ao total da sala
+            # Esta lógica assume que o "Total Geral" é sempre o último valor no documento e não pertence a nenhuma sala
+            if 'Total:' in conteudo_sala:
+                valores = valores[:-1]
+
+            # O último valor numérico é assumido como o valor total da sala
+            valor_total = valores[-1] if valores else "Valor não encontrado"
+
+            print(f"PA: {numero_sala_formatado}")
+            print(f"Protocolo: {protocolo}")
+            print(f"Valor Total: {valor_total}\n")
+            
+        for resultado in resultados_salas_PB:
+            numero_sala, protocolo, conteudo_sala = resultado
+
+            # Formata o número da sala para ter 4 dígitos
+            numero_sala_formatado = numero_sala.zfill(4)
+
+            # Extraindo todos os valores numéricos da seção capturada
+            valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)
+
+            # Excluindo o último valor numérico se ele pertencer ao total geral e não ao total da sala
+            # Esta lógica assume que o "Total Geral" é sempre o último valor no documento e não pertence a nenhuma sala
+            if 'Total:' in conteudo_sala:
+                valores = valores[:-1]
+
+            # O último valor numérico é assumido como o valor total da sala
+            valor_total = valores[-1] if valores else "Valor não encontrado"
+
+            print(f"PB: {numero_sala_formatado}")
+            print(f"Protocolo: {protocolo}")
+            print(f"Valor Total: {valor_total}\n")
+            
+        for resultado in resultados_salas_PC:
+            numero_sala, protocolo, conteudo_sala = resultado
+
+            # Formata o número da sala para ter 4 dígitos
+            numero_sala_formatado = numero_sala.zfill(4)
+
+            # Extraindo todos os valores numéricos da seção capturada
+            valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)
+
+            # Excluindo o último valor numérico se ele pertencer ao total geral e não ao total da sala
+            # Esta lógica assume que o "Total Geral" é sempre o último valor no documento e não pertence a nenhuma sala
+            if 'Total:' in conteudo_sala:
+                valores = valores[:-1]
+
+            # O último valor numérico é assumido como o valor total da sala
+            valor_total = valores[-1] if valores else "Valor não encontrado"
+
+            print(f"PC: {numero_sala_formatado}")
+            print(f"Protocolo: {protocolo}")
+            print(f"Valor Total: {valor_total}\n")
+
+        for resultado in resultados_salas_PD:
+            numero_sala, protocolo, conteudo_sala = resultado
+
+            # Formata o número da sala para ter 4 dígitos
+            numero_sala_formatado = numero_sala.zfill(4)
+
+            # Extraindo todos os valores numéricos da seção capturada
+            valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)
+
+            # Excluindo o último valor numérico se ele pertencer ao total geral e não ao total da sala
+            # Esta lógica assume que o "Total Geral" é sempre o último valor no documento e não pertence a nenhuma sala
+            if 'Total:' in conteudo_sala:
+                valores = valores[:-1]
+
+            # O último valor numérico é assumido como o valor total da sala
+            valor_total = valores[-1] if valores else "Valor não encontrado"
+
+            print(f"PD: {numero_sala_formatado}")
+            print(f"Protocolo: {protocolo}")
+            print(f"Valor Total: {valor_total}\n")
 
         for resultado in resultados_salas:
             numero_sala, protocolo, conteudo_sala = resultado
 
             # Formata o número da sala para ter 4 dígitos
-            numero_sala_formatado = numero_sala.zfill(2)
+            numero_sala_formatado = numero_sala.zfill(1)
 
             # Extraindo todos os valores numéricos da seção capturada
             valores = re.findall(r"(\d{1,3}(?:\.\d{3})*,\d{2})", conteudo_sala)
